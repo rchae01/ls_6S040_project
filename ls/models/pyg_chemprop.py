@@ -69,8 +69,13 @@ def aggregate_at_nodes(num_nodes, message, edge_index):
 
 @ModelFactory.register('pyg_chemprop')
 class pyg_chemprop(nn.Module):
-    def __init__(self, hidden_size, node_fdim, edge_fdim, depth=3):
+    def __init__(self, include_label: bool, num_classes: int,hidden_size, node_fdim, edge_fdim, depth=3):
         super(pyg_chemprop, self).__init__()
+        
+       
+        self.num_classes = num_classes
+        self.include_label = include_label
+            
         self.act_func = nn.ReLU()
         self.W1 = nn.Linear(node_fdim + edge_fdim, hidden_size, bias=False)
         self.W2 = nn.Linear(hidden_size, hidden_size, bias=False)
@@ -102,6 +107,10 @@ class pyg_chemprop(nn.Module):
 
         z = torch.cat([x, v_msg], dim=1)
         node_attr = self.act_func(self.W3(z))
+        
+        if self.include_label:
+            one_hot = F.one_hot(y, num_classes = self.include_label).float()
+            x = torch.cat([x, one_hot], dim=1)
 
         # readout: pyg global pooling
         return global_mean_pool(node_attr, batch)

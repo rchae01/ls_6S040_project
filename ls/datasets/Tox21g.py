@@ -9,6 +9,7 @@ import torch
 from torch.utils.data import Dataset
 import pandas as pd
 import torch_geometric.utils as tg
+from pyg_chemprop_utils import smiles2data
 
 from ls.utils.print import print
 

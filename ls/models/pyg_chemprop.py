@@ -66,9 +66,9 @@ def aggregate_at_nodes(num_nodes, message, edge_index):
 
 
 @ModelFactory.register('pyg_chemprop')
-class DMPNNEncoder(nn.Module):
+class pyg_chemprop(nn.Module):
     def __init__(self, hidden_size, node_fdim, edge_fdim, depth=3):
-        super(DMPNNEncoder, self).__init__()
+        super(pyg_chemprop, self).__init__()
         self.act_func = nn.ReLU()
         self.W1 = nn.Linear(node_fdim + edge_fdim, hidden_size, bias=False)
         self.W2 = nn.Linear(hidden_size, hidden_size, bias=False)

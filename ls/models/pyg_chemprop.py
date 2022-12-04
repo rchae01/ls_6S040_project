@@ -8,6 +8,8 @@ from torch_geometric.nn import global_mean_pool
 from torch_scatter import scatter_sum
 from tqdm import tqdm
 
+from ls.models.build import ModelFactory
+
 
 class RevIndexedData(Data):
     def __init__(self, orig):

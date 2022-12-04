@@ -25,11 +25,12 @@ class Tox21g(Dataset):
 
         for smile in smiles_df.values:
             smile = smile[0]
-            smile_data = tg.from_smiles(smile)
+            smile_data = smiles2data(smile)
             smiles_lst.append(smile_data)
 
         self.targets = torch.tensor(targets_df.values)
         self.data = smiles_lst
+        
         self.length = len(self.targets)
 
     def __len__(self):

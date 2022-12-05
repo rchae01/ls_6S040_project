@@ -28,7 +28,7 @@ class Tox21g(Dataset):
 #             smile_data = smiles2data(smile)
 #             smiles_lst.append(smile_data)
 
-        self.targets = torch.tensor(targets_df.values)
+        self.targets = targets_df
         self.data = smiles_df
         
         self.length = len(self.targets)

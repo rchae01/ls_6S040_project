@@ -157,17 +157,27 @@ class BasicGNN(torch.nn.Module):
         if hasattr(self, 'lin'):
             self.lin.reset_parameters()
 
-    def forward(
-        self,
-        x: Tensor,
-        #edge_index: Adj,
-        *,
-        edge_weight: OptTensor = None,
-        edge_attr: OptTensor = None,
-    ) -> Tensor:
-        """"""
+    def forward(self, x, y=None)
+    
+        x, edge_index, edge_attr = (
+            data.x,
+            data.edge_index,
+            data.edge_attr,
+        )
         
-        edge_index  =  x.edge_index
+        edge_weight = None
+        
+        
+        #self,
+        #x: Tensor,
+        #edge_index: Adj,
+        #*,
+        #edge_weight: OptTensor = None,
+        #edge_attr: OptTensor = None,
+    #) -> Tensor:
+        #""""""
+        #print(x)
+        
         
         xs: List[Tensor] = []
         for i in range(self.num_layers):

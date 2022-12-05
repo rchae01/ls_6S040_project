@@ -21,16 +21,15 @@ class Tox21g(Dataset):
 
         targets_df = pd.DataFrame(data, columns=['NR-AR'])
         smiles_df = pd.DataFrame(data, columns=['smiles'])
-        
-        smiles_lst = []
+       
 
-        for smile in smiles_df.values:
-            smile = smile[0]
-            smile_data = smiles2data(smile)
-            smiles_lst.append(smile_data)
+#         for smile in smiles_df.values:
+#             smile = smile[0]
+#             smile_data = smiles2data(smile)
+#             smiles_lst.append(smile_data)
 
         self.targets = torch.tensor(targets_df.values)
-        self.data = smiles_lst
+        self.data = list(smiles_df.values)
         
         self.length = len(self.targets)
 

@@ -7,7 +7,7 @@ from torch.utils.data import Dataset, Subset, random_split, RandomSampler, DataL
 from ls.utils.optim import get_optim, optim_step
 from ls.utils.print import print
 from .test_predictor import test_predictor
-from ls.collate_function import default_collate
+from .collate_function import default_collate
 
 
 def train_predictor(data: Dataset = None,

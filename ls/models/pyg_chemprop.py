@@ -79,7 +79,7 @@ def aggregate_at_nodes(num_nodes, message, edge_index):
 
 @ModelFactory.register('pyg_chemprop')
 class pyg_chemprop(nn.Module):
-    def __init__(self, include_label: bool, num_classes: int, hidden_size=300, node_fdim=9, edge_fdim=3, depth=3):
+    def __init__(self, include_label: bool, num_classes: int, hidden_size=300, node_fdim=133, edge_fdim=14, depth=3):
         super(pyg_chemprop, self).__init__()
         
        

@@ -160,12 +160,14 @@ class BasicGNN(torch.nn.Module):
     def forward(
         self,
         x: Tensor,
-        edge_index: Adj,
+        #edge_index: Adj,
         *,
         edge_weight: OptTensor = None,
         edge_attr: OptTensor = None,
     ) -> Tensor:
         """"""
+        
+        edge_index  =  x.edge_index
         
         xs: List[Tensor] = []
         for i in range(self.num_layers):

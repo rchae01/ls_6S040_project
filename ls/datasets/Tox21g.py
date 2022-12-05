@@ -20,7 +20,7 @@ class Tox21g(Dataset):
         data = pd.read_csv(r"/Users/Rachel/Downloads/tox21.csv")
 
         targets_df = list(data['NR-AR'])
-        smiles_df = list(data['smiles'])
+        smiles_df = list(data['smiles']) #filter the lists to not include NaN
 
         self.targets = targets_df
         self.data = smiles_df
@@ -35,4 +35,4 @@ class Tox21g(Dataset):
             Return the molecule representation and the label for the given
             index.
         '''
-        return smiles2data(self.data[idx]), torch.tensor(self.targets[idx], dtype=torch.long)
+        return smiles2data(self.data[idx]), torch.tensor(self.targets[idx]).long()

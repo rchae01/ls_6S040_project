@@ -41,4 +41,4 @@ class Tox21g(Dataset):
             Return the molecule representation and the label for the given
             index.
         '''
-        return [self.data[idx]], self.targets[idx]
+        return self.data[idx], self.targets[idx]

@@ -92,7 +92,7 @@ class pyg_chemprop(nn.Module):
         self.W3 = nn.Linear(node_fdim + hidden_size, hidden_size, bias=True)
         self.depth = depth
 
-    def forward(self, data):
+    def forward(self, data, y=None):
         x, edge_index, edge_attr, num_nodes, batch = (
             data.x,
             data.edge_index,
@@ -102,7 +102,7 @@ class pyg_chemprop(nn.Module):
         )
         
         revedge_index = get_reverse_edge_indices(edge_index)
-        print(x.shape)
+        #print(x.shape)
 
         # initialize messages on edges
         init_msg = torch.cat([x[edge_index[0]], edge_attr], dim=1).float()

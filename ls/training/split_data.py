@@ -6,6 +6,7 @@ from torch.utils.data import Dataset, DataLoader
 from torch.distributions.categorical import Categorical
 from pyg_chemprop_utils import smiles2data
 from torch_geometric.data import Batch
+from collate_function import default_collate
 
 from ls.utils.print import print
 
@@ -24,7 +25,8 @@ def split_data(data: Dataset = None,
     # the index of each example)
     test_loader = DataLoader(data, shuffle=False,
                              batch_size=cfg['batch_size'],
-                             num_workers=cfg['num_workers'])
+                             num_workers=cfg['num_workers'],
+                            collate_fn = default_collate)
 
     total_mask, total_y = [], []
 
@@ -33,8 +35,6 @@ def split_data(data: Dataset = None,
 
     with torch.no_grad():
         for x, y in test_loader:
-            smiles_lst = [smiles2data(smile) for smile in x]
-            x = Batch.from_data_list(smiles_lst, None, None)
             
             # Move the current batch onto the device
             x = x.to(cfg['device'])

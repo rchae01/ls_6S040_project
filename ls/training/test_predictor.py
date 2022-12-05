@@ -1,6 +1,7 @@
 import torch
 from torch.utils.data import Dataset, Subset, DataLoader
 from sklearn.metrics import roc_auc_score
+from collate_function import default_collate
 
 
 def test_predictor(data: Dataset = None,
@@ -28,7 +29,8 @@ def test_predictor(data: Dataset = None,
             test_data = Subset(data, indices=test_indices)
 
         loader = DataLoader(test_data, batch_size=cfg['batch_size'],
-                            shuffle=False, num_workers=cfg['num_workers'])
+                            shuffle=False, num_workers=cfg['num_workers'],
+                           collate_fn = default_collate)
 
     with torch.no_grad():
 

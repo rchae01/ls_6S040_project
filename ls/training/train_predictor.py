@@ -7,12 +7,14 @@ from torch.utils.data import Dataset, Subset, random_split, RandomSampler, DataL
 from ls.utils.optim import get_optim, optim_step
 from ls.utils.print import print
 from .test_predictor import test_predictor
+from collate_function import default_collate
 
 
 def train_predictor(data: Dataset = None,
                     train_indices: list[int] = None,
                     predictor: torch.nn.Module = None,
-                    cfg: dict = None):
+                    cfg: dict = None
+                   ):
     '''
         Train the predictor on the train split
         We sample a random set from train for early stopping and validation
@@ -32,14 +34,16 @@ def train_predictor(data: Dataset = None,
         train_data, batch_size=cfg['batch_size'],
         sampler=RandomSampler(train_data, replacement=True,
                               num_samples=cfg['batch_size']*cfg['num_batches']),
-        num_workers=cfg['num_workers']
+        num_workers=cfg['num_workers'],
+        collate_fn = default_collate
     )
 
     val_loader = DataLoader(
         val_data, batch_size=cfg['batch_size'],
         sampler=RandomSampler(val_data, replacement=True,
                               num_samples=cfg['batch_size']*cfg['num_batches']),
-        num_workers=cfg['num_workers'])
+        num_workers=cfg['num_workers'],
+        collate_fn = default_collate)
 
     # Get the optimizer of the predictor
     opt = get_optim(predictor, cfg)

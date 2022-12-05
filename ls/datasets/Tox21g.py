@@ -21,12 +21,7 @@ class Tox21g(Dataset):
 
         targets_df = list(data['NR-AR'])
         smiles_df = list(data['smiles'])
-       
 
-#         for smile in smiles_df.values:
-#             smile = smile[0]
-#             smile_data = smiles2data(smile)
-#             smiles_lst.append(smile_data)
 
         self.targets = targets_df
         self.data = smiles_df
@@ -41,4 +36,4 @@ class Tox21g(Dataset):
             Return the molecule representation and the label for the given
             index.
         '''
-        return self.data[idx], self.targets[idx]
+        return smiles2data(self.data[idx]), self.targets[idx]

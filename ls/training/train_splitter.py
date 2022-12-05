@@ -8,7 +8,7 @@ from torch.utils.data import Dataset, Subset, RandomSampler, DataLoader
 from ls.utils.optim import optim_step
 from ls.utils.print import print
 from .utils import compute_marginal_z_loss, compute_y_given_z_loss
-
+from collate_function import default_collate
 
 def print_epoch_res(stats, i):
     print(f"| splitter ep {i} "
@@ -99,7 +99,8 @@ def train_splitter(splitter: nn.Module,
         data, batch_size=cfg['batch_size'],
         sampler=RandomSampler(data, replacement=True,
                               num_samples=cfg['batch_size']*cfg['num_batches']),
-        num_workers=cfg['num_workers']
+        num_workers=cfg['num_workers'],
+        collate_fn = default_collate
     )
 
     # test_loader samples only from the testing split
@@ -109,7 +110,8 @@ def train_splitter(splitter: nn.Module,
         test_data, batch_size=cfg['batch_size'],
         sampler=RandomSampler(test_data, replacement=True,
                               num_samples=cfg['batch_size']*cfg['num_batches']),
-        num_workers=cfg['num_workers']
+        num_workers=cfg['num_workers'],
+        collate_fn = default_collate
     )
 
     loss_list = []  # Keep track of the loss over the past 5 epochs

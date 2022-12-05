@@ -20,10 +20,21 @@ class Tox21g(Dataset):
         data = pd.read_csv(r"/Users/Rachel/Downloads/tox21.csv")
 
         targets_df = list(data['NR-AR'])
-        smiles_df = list(data['smiles']) #filter the lists to not include NaN
+        smiles_df = list(data['smiles']) 
+        
+        #filter the lists to not include NaN
+        
+        targets_lst = []
+        smiles_lst = []
+        
+        for i in range(len(targets_df)):
+            if (targets_df[i] == 0) or (targets_df[i] == 1)
+                targets_lst.append(targets_df[i])
+                smiles_lst. append(smiles_df[i])
+            
 
-        self.targets = targets_df
-        self.data = smiles_df
+        self.targets = targets_lst
+        self.data = smiles_lst
         
         self.length = len(self.targets)
 

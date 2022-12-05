@@ -22,7 +22,6 @@ class Tox21g(Dataset):
         targets_df = list(data['NR-AR'])
         smiles_df = list(data['smiles'])
 
-
         self.targets = targets_df
         self.data = smiles_df
         
@@ -36,4 +35,4 @@ class Tox21g(Dataset):
             Return the molecule representation and the label for the given
             index.
         '''
-        return smiles2data(self.data[idx]), self.targets[idx]
+        return smiles2data(self.data[idx]), torch.tensor(self.targets[idx], dtype=torch.long)

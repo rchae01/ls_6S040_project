@@ -28,7 +28,7 @@ class Tox21g(Dataset):
         smiles_lst = []
         
         for i in range(len(targets_df)):
-            if (targets_df[i] == 0) or (targets_df[i] == 1)
+            if (targets_df[i] == 0) or (targets_df[i] == 1):
                 targets_lst.append(targets_df[i])
                 smiles_lst. append(smiles_df[i])
             

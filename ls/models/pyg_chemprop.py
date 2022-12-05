@@ -102,6 +102,7 @@ class pyg_chemprop(nn.Module):
         )
         
         revedge_index = get_reverse_edge_indices(edge_index)
+        print(x.shape)
 
         # initialize messages on edges
         init_msg = torch.cat([x[edge_index[0]], edge_attr], dim=1).float()

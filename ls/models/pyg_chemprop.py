@@ -11,6 +11,16 @@ from tqdm import tqdm
 from ls.models.build import ModelFactory
 
 
+def get_reverse_edge_indices(edge_index):
+    revedge_index = torch.zeros(edge_index.shape[1]).long()
+    for k, (i, j) in enumerate(zip(*edge_index)):
+        edge_to_i = edge_index[1] == i
+        edge_from_j = edge_index[0] == j
+        revedge_index[k] = torch.where(edge_to_i & edge_from_j)[0]
+    return revedge_index
+
+
+
 class RevIndexedData(Data):
     def __init__(self, orig):
         super(RevIndexedData, self).__init__()
@@ -69,7 +79,7 @@ def aggregate_at_nodes(num_nodes, message, edge_index):
 
 @ModelFactory.register('pyg_chemprop')
 class pyg_chemprop(nn.Module):
-    def __init__(self, include_label: bool, num_classes: int, hidden_size=300, node_fdim=1, edge_fdim=1, depth=3):
+    def __init__(self, include_label: bool, num_classes: int, hidden_size=300, node_fdim=9, edge_fdim=3, depth=3):
         super(pyg_chemprop, self).__init__()
         
        
@@ -83,14 +93,15 @@ class pyg_chemprop(nn.Module):
         self.depth = depth
 
     def forward(self, data):
-        x, edge_index, revedge_index, edge_attr, num_nodes, batch = (
+        x, edge_index, edge_attr, num_nodes, batch = (
             data.x,
             data.edge_index,
-            data.revedge_index,
             data.edge_attr,
             data.num_nodes,
             data.batch,
         )
+        
+        revedge_index = get_reverse_edge_indices(edge_index)
 
         # initialize messages on edges
         init_msg = torch.cat([x[edge_index[0]], edge_attr], dim=1).float()

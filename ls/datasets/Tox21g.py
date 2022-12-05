@@ -19,7 +19,7 @@ class Tox21g(Dataset):
 
         data = pd.read_csv(r"/Users/Rachel/Downloads/tox21.csv")
 
-        targets_df = pd.DataFrame(data, columns=['NR-AR'])
+        targets_df = list(data['NR-AR'])
         smiles_df = list(data['smiles'])
        
 

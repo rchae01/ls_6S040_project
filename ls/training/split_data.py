@@ -4,6 +4,8 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 from torch.distributions.categorical import Categorical
+from pyg_chemprop_utils import smiles2data
+from torch_geometric.data import Batch
 
 from ls.utils.print import print
 
@@ -31,7 +33,9 @@ def split_data(data: Dataset = None,
 
     with torch.no_grad():
         for x, y in test_loader:
-
+            smiles_lst = [smiles2data(smile) for smile in x]
+            x = Batch.from_data_list(smiles_lst, None, None)
+            
             # Move the current batch onto the device
             x = x.to(cfg['device'])
             y = y.to(cfg['device'])

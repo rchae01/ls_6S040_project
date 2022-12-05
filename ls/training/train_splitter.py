@@ -8,7 +8,7 @@ from torch.utils.data import Dataset, Subset, RandomSampler, DataLoader
 from ls.utils.optim import optim_step
 from ls.utils.print import print
 from .utils import compute_marginal_z_loss, compute_y_given_z_loss
-from collate_function import default_collate
+from ls.collate_function import default_collate
 
 def print_epoch_res(stats, i):
     print(f"| splitter ep {i} "

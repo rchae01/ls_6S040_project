@@ -1,7 +1,7 @@
 import torch
 from torch.utils.data import Dataset, Subset, DataLoader
 from sklearn.metrics import roc_auc_score
-from collate_function import default_collate
+from ls.collate_function import default_collate
 
 
 def test_predictor(data: Dataset = None,

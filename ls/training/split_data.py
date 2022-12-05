@@ -6,7 +6,7 @@ from torch.utils.data import Dataset, DataLoader
 from torch.distributions.categorical import Categorical
 from pyg_chemprop_utils import smiles2data
 from torch_geometric.data import Batch
-from collate_function import default_collate
+from ls.collate_function import default_collate
 
 from ls.utils.print import print
 

@@ -157,7 +157,7 @@ class BasicGNN(torch.nn.Module):
         if hasattr(self, 'lin'):
             self.lin.reset_parameters()
 
-    def forward(self, x, y=None)
+    def forward(self, x, y=None):
     
         x, edge_index, edge_attr = (
             data.x,

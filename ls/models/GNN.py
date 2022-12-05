@@ -66,9 +66,9 @@ class BasicGNN(torch.nn.Module):
     """
     def __init__(
         self,
-        in_channels: int,
-        hidden_channels: int,
-        num_layers: int,
+        in_channels: int = 5,
+        hidden_channels: int = 5,
+        num_layers: int = 5,
         out_channels: Optional[int] = None,
         dropout: float = 0.0,
         act: Union[str, Callable, None] = "relu",

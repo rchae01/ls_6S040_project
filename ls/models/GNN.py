@@ -166,6 +166,7 @@ class BasicGNN(torch.nn.Module):
         edge_attr: OptTensor = None,
     ) -> Tensor:
         """"""
+        
         xs: List[Tensor] = []
         for i in range(self.num_layers):
             # Tracing the module is not allowed with *args and **kwargs :(

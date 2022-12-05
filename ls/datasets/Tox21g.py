@@ -10,6 +10,7 @@ from torch.utils.data import Dataset
 import pandas as pd
 import torch_geometric.utils as tg
 from pyg_chemprop_utils import smiles2data
+import torch_geometric.utils as tg
 
 from ls.utils.print import print
 
@@ -46,4 +47,5 @@ class Tox21g(Dataset):
             Return the molecule representation and the label for the given
             index.
         '''
-        return smiles2data(self.data[idx]), torch.tensor(self.targets[idx]).long()
+        #return smiles2data(self.data[idx]), torch.tensor(self.targets[idx]).long()
+        return tg.from_smiles(self.data[idx]), torch.tensor(self.targets[idx]).long()

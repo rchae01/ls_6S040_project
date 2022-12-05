@@ -20,7 +20,7 @@ class Tox21g(Dataset):
         data = pd.read_csv(r"/Users/Rachel/Downloads/tox21.csv")
 
         targets_df = pd.DataFrame(data, columns=['NR-AR'])
-        smiles_df = pd.DataFrame(data, columns=['smiles'])
+        smiles_df = list(data['smiles'])
        
 
 #         for smile in smiles_df.values:
@@ -29,7 +29,7 @@ class Tox21g(Dataset):
 #             smiles_lst.append(smile_data)
 
         self.targets = torch.tensor(targets_df.values)
-        self.data = list(smiles_df.values)
+        self.data = smiles_df
         
         self.length = len(self.targets)
 

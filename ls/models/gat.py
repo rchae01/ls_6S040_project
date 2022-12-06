@@ -26,7 +26,7 @@ class Net(torch.nn.Module):
         
         self.include_label = include_label
         
-        self.seq = nn.Sequential(*modules)
+        self.seq = nn.Linear(self.hidden_dim, self.num_classes)
 
     def forward(self, data, y=None):
         

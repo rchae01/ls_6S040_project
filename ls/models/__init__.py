@@ -49,6 +49,8 @@ from .pyg_chemprop import pyg_chemprop
 
 from .GNN import GIN, GAT
 
+from .gin import gin
+
 # Define the buildin_models list
 from .build import ModelFactory
 builtin_models = list(ModelFactory.registry.keys())

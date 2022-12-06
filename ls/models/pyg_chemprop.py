@@ -8,6 +8,8 @@ from torch_geometric.nn import global_mean_pool
 from torch_scatter import scatter_sum
 from tqdm import tqdm
 
+import torch.nn.functional as F
+
 from ls.models.build import ModelFactory
 
 
@@ -79,7 +81,7 @@ def aggregate_at_nodes(num_nodes, message, edge_index):
 
 @ModelFactory.register('pyg_chemprop')
 class pyg_chemprop(nn.Module):
-    def __init__(self, include_label: bool, num_classes: int, hidden_size=300, node_fdim=133, edge_fdim=14, depth=3):
+    def __init__(self, include_label: bool, num_classes: int, hidden_size=2, node_fdim=133, edge_fdim=14, depth=3):
         super(pyg_chemprop, self).__init__()
         
        
@@ -101,6 +103,7 @@ class pyg_chemprop(nn.Module):
             data.batch,
         )
         
+        
         revedge_index = get_reverse_edge_indices(edge_index)
         #print(x.shape)
 
@@ -120,9 +123,13 @@ class pyg_chemprop(nn.Module):
         z = torch.cat([x, v_msg], dim=1)
         node_attr = self.act_func(self.W3(z))
         
-        #if self.include_label:
-            #one_hot = F.one_hot(y, num_classes = self.include_label).float()
-            #x = torch.cat([x, one_hot], dim=1)
-
+        '''
+        if self.include_label:
+            one_hot = F.one_hot(y, num_classes = self.include_label).float()
+            x = torch.cat([x, one_hot], dim=1)
+        '''
+        
         # readout: pyg global pooling
-        return global_mean_pool(node_attr, batch)
+        #return global_mean_pool(node_attr, batch)
+        
+        return F.log_softmax(x, dim=-1)

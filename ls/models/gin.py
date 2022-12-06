@@ -12,6 +12,7 @@ from torch_geometric.loader import DataLoader
 from torch_geometric.nn import GINConv, global_add_pool
 from torch_geometric.transforms import OneHotDegree
 
+'''
 path = osp.join(osp.dirname(osp.realpath(__file__)), '..', '..', 'data', 'TU')
 dataset = TUDataset(path, name='IMDB-BINARY', transform=OneHotDegree(135))
 dataset = dataset.shuffle()
@@ -19,7 +20,7 @@ test_dataset = dataset[:len(dataset) // 10]
 train_dataset = dataset[len(dataset) // 10:]
 test_loader = DataLoader(test_dataset, batch_size=128)
 train_loader = DataLoader(train_dataset, batch_size=128)
-
+'''
 
 @ModelFactory.register('gin')
 class Net(torch.nn.Module):
@@ -67,7 +68,11 @@ class Net(torch.nn.Module):
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.lin2(x)
         
-        
+        '''
+        if self.include_label:
+            one_hot = F.one_hot(y, num_classes = self.include_label).float()
+            x = torch.cat([x, one_hot], dim=1)
+        '''
         
         return F.log_softmax(x, dim=-1)
 

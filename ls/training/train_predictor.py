@@ -64,7 +64,8 @@ def train_predictor(data: Dataset = None,
             y = y.to(cfg['device'])
 
             out = predictor(x)
-
+            
+            print(out, y)
             loss = F.cross_entropy(out, y)
 
             optim_step(predictor, opt, loss, cfg)

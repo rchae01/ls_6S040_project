@@ -165,6 +165,7 @@ class BasicGNN(torch.nn.Module):
             data.edge_attr,
         )
         
+        print(x.shape)
         edge_weight = None
         
         

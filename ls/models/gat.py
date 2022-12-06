@@ -18,6 +18,8 @@ class Net(torch.nn.Module):
         
         super().__init__()
         
+        self.num_classes = num_classes
+        
         self.conv1 = GATConv(133, 8, heads=8,
                              dropout=0.6).jittable()
 
@@ -26,7 +28,7 @@ class Net(torch.nn.Module):
         
         self.include_label = include_label
         
-        self.seq = nn.Linear(self.hidden_dim, self.num_classes)
+        self.seq = nn.Linear(self.include_label, self.num_classes)
 
     def forward(self, data, y=None):
         

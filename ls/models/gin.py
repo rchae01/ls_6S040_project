@@ -37,6 +37,7 @@ class Net(torch.nn.Module):
         
         self.convs = torch.nn.ModuleList()
         self.batch_norms = torch.nn.ModuleList()
+        self.num_classes = num_classes
         
         self.include_label = include_label
 
@@ -58,7 +59,7 @@ class Net(torch.nn.Module):
         self.batch_norm1 = BatchNorm(hidden_channels)
         self.lin2 = Linear(hidden_channels, out_channels)
         
-        self.seq = nn.Linear(self.hidden_channels, self.num_classes)
+        self.seq = nn.Linear(hidden_channels + self.include_label, self.num_classes)
 
     def forward(self, data, y=None):
         

@@ -23,9 +23,16 @@ train_loader = DataLoader(train_dataset, batch_size=128)
 
 @ModelFactory.register('gin')
 class Net(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, num_layers, include_label):
+    def __init__(self, include_label: int, 
+                 num_classes: int = 2):
+        
         super().__init__()
-
+        
+        in_channels = 133
+        hidden_channels = 9
+        out_channels = 2
+        num_layers = 3
+        
         self.convs = torch.nn.ModuleList()
         self.batch_norms = torch.nn.ModuleList()
 

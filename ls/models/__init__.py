@@ -47,9 +47,9 @@ from .vision_transformer import vit_b_16, vit_b_32, vit_l_16, vit_l_32, vit_h_14
 
 from .pyg_chemprop import pyg_chemprop
 
-from .GNN import GIN, GAT
+#from .GNN import GIN, GAT
 
-from .gin import gin
+from .gin import Net
 
 # Define the buildin_models list
 from .build import ModelFactory

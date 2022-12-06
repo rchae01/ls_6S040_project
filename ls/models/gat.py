@@ -3,6 +3,7 @@ from .build import ModelFactory
 import os.path as osp
 
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
 
 import torch_geometric.transforms as T

@@ -4,6 +4,7 @@ import os.path as osp
 
 import torch
 import torch.nn.functional as F
+import torch.nn as nn
 from torch.nn import BatchNorm1d as BatchNorm
 from torch.nn import Linear, ReLU, Sequential
 

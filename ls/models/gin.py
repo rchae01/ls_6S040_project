@@ -56,13 +56,12 @@ class Net(torch.nn.Module):
         x = self.lin2(x)
         return F.log_softmax(x, dim=-1)
 
-
+'''
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = Net(dataset.num_features, 64, dataset.num_classes, num_layers=3)
 model = model.to(device)
 model = torch.jit.script(model)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-
 
 def train():
     model.train()
@@ -92,7 +91,7 @@ def test(loader):
     return total_correct / len(loader.dataset)
 
 
-'''
+
 for epoch in range(1, 101):
     loss = train()
     train_acc = test(train_loader)

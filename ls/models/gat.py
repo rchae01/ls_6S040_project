@@ -28,7 +28,9 @@ class Net(torch.nn.Module):
         
         self.include_label = include_label
         
-        self.seq = nn.Linear(self.include_label, self.num_classes)
+        hidden = 5
+        
+        self.seq = nn.Linear(hidden + self.include_label, self.num_classes)
 
     def forward(self, data, y=None):
         

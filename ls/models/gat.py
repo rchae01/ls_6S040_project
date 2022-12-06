@@ -28,7 +28,7 @@ class Net(torch.nn.Module):
         
         self.include_label = include_label
         
-        hidden = 5
+        hidden = 2
         
         self.seq = nn.Linear(hidden + self.include_label, self.num_classes)
 

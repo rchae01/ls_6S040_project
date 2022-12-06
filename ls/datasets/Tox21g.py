@@ -47,5 +47,5 @@ class Tox21g(Dataset):
             Return the molecule representation and the label for the given
             index.
         '''
-        return smiles2data(self.data[idx]), torch.tensor(self.targets[idx]).long()
-        #return tg.from_smiles(self.data[idx]), torch.tensor(self.targets[idx]).long()
+        #return smiles2data(self.data[idx]), torch.tensor(self.targets[idx]).long()
+        return tg.from_smiles(self.data[idx]), torch.tensor(self.targets[idx]).long()

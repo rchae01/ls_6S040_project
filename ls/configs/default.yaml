@@ -35,7 +35,7 @@ num_workers: 3
 num_batches: 100
 #
 # The number of examples for each batch
-batch_size: 5
+batch_size: 200
 #
 # Number of classes of the classification dataset
 num_classes: 2

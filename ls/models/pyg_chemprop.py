@@ -93,6 +93,15 @@ class pyg_chemprop(nn.Module):
         self.W2 = nn.Linear(hidden_size, hidden_size, bias=False)
         self.W3 = nn.Linear(node_fdim + hidden_size, hidden_size, bias=True)
         self.depth = depth
+        
+        
+        self.include_label = include_label
+        
+        hidden = hidden_size
+        
+        self.seq = nn.Linear(hidden + self.include_label, self.num_classes)
+        
+        
 
     def forward(self, data, y=None):
         x, edge_index, edge_attr, num_nodes, batch = (
@@ -123,13 +132,21 @@ class pyg_chemprop(nn.Module):
         z = torch.cat([x, v_msg], dim=1)
         node_attr = self.act_func(self.W3(z))
         
-        '''
+        
+        x = global_mean_pool(node_attr, batch)
+        
+        
+        
         if self.include_label:
-            one_hot = F.one_hot(y, num_classes = self.include_label).float()
-            x = torch.cat([x, one_hot], dim=1)
-        '''
+            x = torch.cat(
+                [x, F.one_hot(y, num_classes=self.include_label).float()],
+                dim=1
+            )
+
+        x = self.seq(x)
         
         # readout: pyg global pooling
         #return global_mean_pool(node_attr, batch)
         
         return F.log_softmax(x, dim=-1)
+        #return x

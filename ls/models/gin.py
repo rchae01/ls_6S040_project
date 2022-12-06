@@ -54,11 +54,11 @@ class Net(torch.nn.Module):
         self.batch_norm1 = BatchNorm(hidden_channels)
         self.lin2 = Linear(hidden_channels, out_channels)
 
-    def forward(self, x, y=None):
+    def forward(self, data, y=None):
         
-        x = x.x
-        edge_index = x.edge_index
-        batch = x.batch
+        x = data.x
+        edge_index = data.edge_index
+        batch = data.batch
         
         for conv, batch_norm in zip(self.convs, self.batch_norms):
             x = F.relu(batch_norm(conv(x, edge_index)))
@@ -66,6 +66,9 @@ class Net(torch.nn.Module):
         x = F.relu(self.batch_norm1(self.lin1(x)))
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.lin2(x)
+        
+        
+        
         return F.log_softmax(x, dim=-1)
 
 '''

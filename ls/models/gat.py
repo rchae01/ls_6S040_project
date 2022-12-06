@@ -22,6 +22,8 @@ class Net(torch.nn.Module):
 
         self.conv2 = GATConv(64, 2, heads=1, concat=True,
                              dropout=0.6).jittable()
+        
+        self.include_label = include_label
 
     def forward(self, data, y=None):
         
@@ -39,13 +41,17 @@ class Net(torch.nn.Module):
         
         x = global_add_pool(x, batch)
         
+        '''
         if self.include_label:
             x = torch.cat(
                 [x, F.one_hot(y, num_classes=self.include_label).float()],
                 dim=1
             )
+            
 
         x = self.seq(x)
+        
+        '''
         #return F.log_softmax(x, dim=1)
         return x
 

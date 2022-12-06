@@ -36,6 +36,8 @@ class Net(torch.nn.Module):
         
         self.convs = torch.nn.ModuleList()
         self.batch_norms = torch.nn.ModuleList()
+        
+        self.include_label = include_label
 
         for i in range(num_layers):
             mlp = Sequential(

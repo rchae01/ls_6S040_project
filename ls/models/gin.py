@@ -56,6 +56,8 @@ class Net(torch.nn.Module):
         self.lin1 = Linear(hidden_channels, hidden_channels)
         self.batch_norm1 = BatchNorm(hidden_channels)
         self.lin2 = Linear(hidden_channels, out_channels)
+        
+        self.seq = nn.Sequential(*modules)
 
     def forward(self, data, y=None):
         

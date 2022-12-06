@@ -24,13 +24,15 @@ class Net(torch.nn.Module):
                              dropout=0.6).jittable()
         
         self.include_label = include_label
+        
+        self.seq = nn.Sequential(*modules)
 
     def forward(self, data, y=None):
         
         x = data.x
         edge_index = data.edge_index
         batch = data.batch
-        print(x.shape)
+        #print(x.shape)
         
         
         x = F.dropout(x, p=0.6, training=self.training)

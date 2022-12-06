@@ -65,7 +65,7 @@ def train_predictor(data: Dataset = None,
 
             out = predictor(x)
             
-            print(out, y)
+            #print(out, y)
             loss = F.cross_entropy(out, y)
 
             optim_step(predictor, opt, loss, cfg)

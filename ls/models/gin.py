@@ -54,7 +54,12 @@ class Net(torch.nn.Module):
         self.batch_norm1 = BatchNorm(hidden_channels)
         self.lin2 = Linear(hidden_channels, out_channels)
 
-    def forward(self, x, edge_index, batch):
+    def forward(self, x, y=None):
+        
+        x = x.x
+        edge_index = x.edge_index
+        batch = x.batch
+        
         for conv, batch_norm in zip(self.convs, self.batch_norms):
             x = F.relu(batch_norm(conv(x, edge_index)))
         x = global_add_pool(x, batch)

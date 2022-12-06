@@ -66,7 +66,7 @@ class BasicGNN(torch.nn.Module):
     """
     def __init__(
         self,
-        in_channels: int = 109,
+        in_channels: int = 78,
         hidden_channels: int = 9,
         num_layers: int = 9,
         out_channels: Optional[int] = None,

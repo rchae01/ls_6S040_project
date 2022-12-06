@@ -17,7 +17,7 @@ class Net(torch.nn.Module):
         
         super().__init__()
         
-        self.conv1 = GATConv(5, 8, heads=8,
+        self.conv1 = GATConv(133, 8, heads=8,
                              dropout=0.6).jittable()
 
         self.conv2 = GATConv(64, 2, heads=1, concat=True,
@@ -27,6 +27,7 @@ class Net(torch.nn.Module):
         
         x = data.x
         edge_index = data.edge_index
+        print(x.shape)
         
         x = F.dropout(x, p=0.6, training=self.training)
         x = F.elu(self.conv1(x, edge_index))

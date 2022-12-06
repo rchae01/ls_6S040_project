@@ -123,8 +123,10 @@ class pyg_chemprop(nn.Module):
         node_attr = self.act_func(self.W3(z))
         
         if self.include_label:
-            one_hot = F.one_hot(y, num_classes = self.include_label).float()
-            x = torch.cat([x, one_hot], dim=1)
+            x = torch.cat(
+                [x, F.one_hot(y, num_classes=self.include_label).float()],
+                dim=1
+            )
 
         # readout: pyg global pooling
         return global_mean_pool(node_attr, batch)

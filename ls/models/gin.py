@@ -67,14 +67,19 @@ class Net(torch.nn.Module):
         x = F.relu(self.batch_norm1(self.lin1(x)))
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.lin2(x)
+       
         
-        '''
+        
         if self.include_label:
-            one_hot = F.one_hot(y, num_classes = self.include_label).float()
-            x = torch.cat([x, one_hot], dim=1)
-        '''
+            x = torch.cat(
+                [x, F.one_hot(y, num_classes=self.include_label).float()],
+                dim=1
+            )
+
+        x = self.seq(x)
         
-        return F.log_softmax(x, dim=-1)
+        #return F.log_softmax(x, dim=-1)
+        return x
 
 '''
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

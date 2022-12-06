@@ -7,7 +7,7 @@ import torch.nn.functional as F
 
 import torch_geometric.transforms as T
 from torch_geometric.datasets import Planetoid
-from torch_geometric.nn import GATConv
+from torch_geometric.nn import GATConv, global_add_pool
 
 
 @ModelFactory.register('gat')
@@ -27,11 +27,25 @@ class Net(torch.nn.Module):
         
         x = data.x
         edge_index = data.edge_index
+        batch = data.batch
         print(x.shape)
+        
         
         x = F.dropout(x, p=0.6, training=self.training)
         x = F.elu(self.conv1(x, edge_index))
         x = F.dropout(x, p=0.6, training=self.training)
         x = self.conv2(x, edge_index)
-        return F.log_softmax(x, dim=1)
+        
+        
+        x = global_add_pool(x, batch)
+        
+        if self.include_label:
+            x = torch.cat(
+                [x, F.one_hot(y, num_classes=self.include_label).float()],
+                dim=1
+            )
+
+        x = self.seq(x)
+        #return F.log_softmax(x, dim=1)
+        return x
 

@@ -51,6 +51,8 @@ from .pyg_chemprop import pyg_chemprop
 
 from .gin import Net
 
+from .gat import Net
+
 # Define the buildin_models list
 from .build import ModelFactory
 builtin_models = list(ModelFactory.registry.keys())

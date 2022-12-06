@@ -70,6 +70,8 @@ def learning_to_split(data: Dataset,
         # Get the predictor.
         predictor = ModelFactory.get_model(cfg, predictor=True)
         #
+        
+        print(predictor)
         # Train it on the training split
         val_score = train_predictor(data=data, train_indices=train_indices,
                                     predictor=predictor, cfg=cfg)

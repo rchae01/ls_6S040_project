@@ -62,8 +62,8 @@ class Tox21g(Dataset):
 
         #data = pd.read_csv(r"/Users/Rachel/Downloads/tox21.csv")
         
-        print(os.path.join(sys.path, "tox21.csv"))
-        data = pd.read_csv(os.path.join(sys.path, "tox21.csv"))
+        print(os.path.join(sys.path[0], "ls_6S040_project/ls/datasets/tox21.csv"))
+        data = pd.read_csv(os.path.join(sys.path[0], "ls_6S040_project/ls/datasets/tox21.csv"))
 
         targets_df = list(data['NR-AR'])
         smiles_df = list(data['smiles']) 

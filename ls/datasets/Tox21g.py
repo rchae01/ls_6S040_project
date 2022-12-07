@@ -59,7 +59,8 @@ def smiles2data(smi, explicit_h=True):
 class Tox21g(Dataset):
     def __init__(self):
 
-        data = pd.read_csv(r"/Users/Rachel/Downloads/tox21.csv")
+        #data = pd.read_csv(r"/Users/Rachel/Downloads/tox21.csv")
+        data = pd.read_csv(r"tox21.csv")
 
         targets_df = list(data['NR-AR'])
         smiles_df = list(data['smiles']) 

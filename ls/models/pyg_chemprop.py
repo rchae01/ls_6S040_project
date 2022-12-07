@@ -81,7 +81,8 @@ def aggregate_at_nodes(num_nodes, message, edge_index):
 
 @ModelFactory.register('pyg_chemprop')
 class pyg_chemprop(nn.Module):
-    def __init__(self, include_label: bool, num_classes: int, hidden_size=2, node_fdim=133, edge_fdim=14, depth=3):
+    def __init__(self, include_label: bool, num_classes: int, hidden_size=2, node_fdim=9, edge_fdim=3, depth=3):
+        #133 node fdim, edgedim 14
         super(pyg_chemprop, self).__init__()
         
        
@@ -104,6 +105,8 @@ class pyg_chemprop(nn.Module):
         
 
     def forward(self, data, y=None):
+        print(self.W1.weight.device)
+        
         x, edge_index, edge_attr, num_nodes, batch = (
             data.x,
             data.edge_index,
@@ -148,5 +151,5 @@ class pyg_chemprop(nn.Module):
         # readout: pyg global pooling
         #return global_mean_pool(node_attr, batch)
         
-        return F.log_softmax(x, dim=-1)
+        return x
         #return x

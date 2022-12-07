@@ -11,7 +11,7 @@ class mlp(nn.Module):
         A simple multi layer perceptron with dropout
     '''
     def __init__(self, include_label: int,
-                 hidden_dim_list: list[int] = [1644, 1024, 1024, 1024],
+                 #hidden_dim_list: list[int] = [1644, 1024, 1024, 1024],
                  num_classes: int = 2,
                  dropout: float = 0.3):
 

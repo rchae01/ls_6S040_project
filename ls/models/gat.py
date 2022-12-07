@@ -34,7 +34,7 @@ class Net(torch.nn.Module):
 
     def forward(self, data, y=None):
         
-        x = data.x
+        x = data.x.float()
         edge_index = data.edge_index
         batch = data.batch
         #print(x.shape)

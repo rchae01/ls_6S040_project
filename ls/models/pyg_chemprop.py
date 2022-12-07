@@ -105,7 +105,7 @@ class pyg_chemprop(nn.Module):
         
 
     def forward(self, data, y=None):
-        print(self.W1.weight.device)
+        #print(self.W1.weight.device)
         
         x, edge_index, edge_attr, num_nodes, batch = (
             data.x,

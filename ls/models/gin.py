@@ -30,7 +30,7 @@ class Net(torch.nn.Module):
         
         super().__init__()
         
-        in_channels = 133
+        in_channels = 9
         hidden_channels = 9
         out_channels = 2
         num_layers = 3

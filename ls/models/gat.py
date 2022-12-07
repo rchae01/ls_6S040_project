@@ -20,7 +20,7 @@ class Net(torch.nn.Module):
         
         self.num_classes = num_classes
         
-        self.conv1 = GATConv(133, 8, heads=8,
+        self.conv1 = GATConv(9, 8, heads=8,
                              dropout=0.6).jittable()
 
         self.conv2 = GATConv(64, 2, heads=1, concat=True,

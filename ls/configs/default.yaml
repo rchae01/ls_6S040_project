@@ -54,7 +54,7 @@ ratio: 0.75
 w_gap: 1
 #
 # Weight for the train/test ratio loss.
-w_ratio: 1
+w_ratio: 4
 #
 # Weight for the train/test label distribution loss.
 w_balance: 1

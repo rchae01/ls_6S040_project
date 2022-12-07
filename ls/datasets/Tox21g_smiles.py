@@ -276,7 +276,7 @@ class NoamLR(_LRScheduler):
             self.optimizer.param_groups[i]["lr"] = self.lr[i]
 
 
-class Tox21g(Dataset):
+class Tox21g_smiles(Dataset):
     def __init__(self):
 
         #data = pd.read_csv(r"/Users/Rachel/Downloads/tox21.csv")
@@ -311,5 +311,5 @@ class Tox21g(Dataset):
             Return the molecule representation and the label for the given
             index.
         '''
-        #return smiles2data(self.data[idx]), torch.tensor(self.targets[idx]).long()
-        return tg.from_smiles(self.data[idx]), torch.tensor(self.targets[idx]).long()
+        return self.data[idx], torch.tensor(self.targets[idx]).long()
+        #return tg.from_smiles(self.data[idx]), torch.tensor(self.targets[idx]).long()

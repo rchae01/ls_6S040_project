@@ -17,7 +17,7 @@ class textcnn(nn.Module):
                  num_classes: int,
                  embedding_dim: int = 300,
                  num_filters: int = 50,
-                 filter_sizes: list[int] = [3, 4, 5],
+                 #filter_sizes: list[int] = [3, 4, 5],
                  dropout=0.1):
 
         super().__init__()
